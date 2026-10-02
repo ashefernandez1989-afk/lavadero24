@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lavadero 2.4 — Cuidado con amor 💙</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+        }
+        :root {
+            --celeste-claro: #e0f2f9;
+            --celeste-medio: #b3e0f2;
+            --celeste-suave: #81c7e0;
+            --celeste-oscuro: #4a9fc4;
+            --texto-oscuro: #2c4a5c;
+            --fondo: #f0f8fb;
+            --blanco: #ffffff;
+            --sombra: rgba(74, 159, 196, 0.15);
+        }
+        body {
+            background-color: var(--fondo);
+            color: var(--texto-oscuro);
+            line-height: 1.7;
+        }
+        header {
+            background: linear-gradient(135deg, var(--celeste-medio), var(--celeste-suave));
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 10px var(--sombra);
+        }
+        h1 {
+            font-size: 2.2rem;
+            color: var(--texto-oscuro);
+            margin-bottom: 0.5rem;
+        }
+        .subtitulo {
+            font-size: 1.1rem;
+            color: #3a6175;
+            font-style: italic;
+        }
+        nav {
+            background: var(--blanco);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px var(--sombra);
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--celeste-oscuro);
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        nav a:hover {
+            background: var(--celeste-claro);
+        }
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1.2rem;
+        }
+        .seccion {
+            background: var(--blanco);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px var(--sombra);
+            margin-bottom: 2rem;
+        }
+        h2 {
+            color: var(--celeste-oscuro);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--celeste-claro);
+        }
+        .frase-destacada {
+            font-size: 1.3rem;
+            text-align: center;
+            color: var(--celeste-oscuro);
+            font-weight: bold;
+            margin: 1.5rem 0;
+        }
+        .grid-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .tarjeta {
+            background: var(--celeste-claro);
+            padding: 1.5rem;
+            border-radius: 14px;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin: 1rem 0 0.3rem;
+            font-weight: 600;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 0.9rem;
+            border: 2px solid var(--celeste-medio);
+            border-radius: 10px;
+            font-size: 1rem;
+            background: var(--blanco);
+        }
+        button {
+            background: var(--celeste-oscuro);
+            color: white;
+            border: none;
+            font-weight: bold;
+            margin-top: 1.5rem;
+            cursor: pointer;
+        }
+        .btn-verde {
+            background: #66bb92;
+        }
+        .horarios {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+        .horario {
+            padding: 0.8rem;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .disponible {
+            background: #d4f1de;
+            color: #2c6e4f;
+            border: 2px solid #98d3b4;
+        }
+        .ocupado {
+            background: #e9e9e9;
+            color: #888;
+            border: 2px solid #ddd;
+            cursor: not-allowed;
+        }
+        .seleccionado {
+            background: var(--celeste-oscuro);
+            color: white;
+        }
+        .caja-pago {
+            background: #fef9e7;
+            border: 2px dashed #f0c860;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+        }
+        .dato-banco {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 0.5rem 0;
+            font-family: monospace;
+            font-size: 1rem;
+        }
+        .admin {
+            background: #f0f4f8;
+            border: 3px solid #ccd9e3;
+        }
+        .reserva-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 0.8rem 0;
+            border-left: 4px solid var(--celeste-oscuro);
+        }
+        footer {
+            background: var(--celeste-medio);
+            color: var(--texto-oscuro);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        .oculto {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🚗 Lavadero 2.4</h1>
+    <p class="subtitulo">Un lugar donde le podés dar un mimo a tu vehículo 💙✨</p>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#reservar">Reservar Turno</a></li>
+        <li><a href="#pago">Pagar</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="#admin" onclick="mostrarAdmin()">🔐 Mis Reservas</a></li>
+    </ul>
+</nav>
+
+<main>
+    <section id="inicio" class="seccion">
+        <h2>Bienvenidos a Lavadero 2.4 💙</h2>
+        <p class="frase-destacada">Tu auto merece cariño, cuidado y confianza ✨</p>
+        <p>Tu vehículo te lleva a todos lados… ¿no merece que lo quieran bien?</p>
+        <br>
+        <p>En <strong>Lavadero 2.4</strong> no solo limpiamos: <em>cuidamos</em>. Trabajamos con amor, detalle por detalle, porque sabemos que tu auto es parte de tu día a día. Lo tratamos como si fuera nuestro.</p>
+        <div class="grid-info">
+            <div class="tarjeta">💙 <strong>Hecho con amor</strong><br>Cada rincón con dedicación</div>
+            <div class="tarjeta">🤝 <strong>De confianza</strong><br>Dejalo acá y andá tranquilo</div>
+            <div class="tarjeta">✨ <strong>Brillo asegurado</strong><br>Quedá como recién salido</div>
+        </div>
+    </section>
+
+    <section id="reservar" class="seccion">
+        <h2>📅 Reservá tu turno</h2>
+        <label for="fecha">Elegí el día:</label>
+        <input type="date" id="fecha" onchange="cargarHorarios()">
+        <p style="margin-top: 1.5rem; font-weight: 600;">Horarios disponibles:</p>
+        <div id="lista-horarios" class="horarios">
+            <p style="grid-column: 1/-1; text-align: center; color: #888;">Primero elegí una fecha 👆</p>
+        </div>
+        <label for="nombre">Tu nombre completo:</label>
+        <input type="text" id="nombre" placeholder="Ej: María Pérez">
+        <label for="telefono">Tu teléfono:</label>
+        <input type="tel" id="telCliente" placeholder="Ej: 099 123 456">
+        <label for="vehiculo">Tipo de vehículo:</label>
+        <select id="vehiculo">
+            <option value="">Seleccioná...</option>
+            <option>Auto chico</option>
+            <option>Auto mediano</option>
+            <option>Camioneta/SUV</option>
+            <option>Otro</option>
+        </select>
+        <button onclick="confirmarReserva()">✅ Confirmar Reserva</button>
+        <p id="mensajeReserva" style="margin-top: 1rem; text-align: center; font-weight: bold;"></p>
+    </section>
+
+    <section id="pago" class="seccion">
+        <h2>💳 Forma de Pago</h2>
+        <p style="text-align: center;">Podés pagar por transferencia bancaria antes de tu turno 💙</p>
+        <div class="caja-pago">
+            <p style="font-weight: bold; text-align: center; margin-bottom: 1rem;">📋 Datos para transferencia:</p>
+            <div class="dato-banco">
+                <strong>Titular:</strong> [Tu Nombre Completo]<br>
+                <strong>Banco:</strong> [Nombre de tu banco]<br>
+                <strong>Nº de Cuenta:</strong> [Tu número de cuenta]<br>
+                <strong>Cédula:</strong> [Tu número de documento]<br>
+                <strong>Alias:</strong> [Tu alias]<br>
+                <strong>CBU:</strong> [Tu CBU]
+            </div>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">💡 Mandá el comprobante por WhatsApp después de transferir.</p>
+        </div>
+        <button class="btn-verde" onclick="window.open('https://wa.me/598[TU_NUMERO]?text=Hola!%20Te%20mando%20el%20comprobante','_blank')">📲 Mandar comprobante por WhatsApp</button>
+    </section>
+
+    <section id="contacto" class="seccion">
+        <h2>📍 Dónde estamos</h2>
+        <div class="grid-info">
+            <div class="tarjeta">
+                📍 <strong>Dirección</strong><br>
+                [Tu dirección completa]<br>
+                Montevideo, Uruguay
+            </div>
+            <div class="tarjeta">
+                📞 <strong>Teléfono / WhatsApp</strong><br>
+                <a href="tel:+598[TU_NUMERO]" style="color: inherit; text-decoration: none;">[Tu número]</a>
+            </div>
+            <div class="tarjeta">
+                ⏰ <strong>Horarios</strong><br>
+                Lun–Vie: 8:00 – 18:00<br>
+                Sáb: 9:00 – 14:00
+            </div>
+        </div>
+    </section>
+
+    <section id="admin" class="seccion admin oculto">
+        <h2>🔐 Tus Reservas</h2>
+        <p style="text-align: center; color: #666; margin-bottom: 1rem;">Acá ves quién reservó 💙</p>
+        <div id="listaReservas">
+            <p style="text-align: center; color: #888;">Todavía no hay reservas.</p>
+        </div>
+        <button onclick="exportarReservas()" style="background: #4a7fb5;">📥 Copiar lista</button>
+    </section>
+</main>
+
+<footer>
+    <p><strong>📍 [Tu dirección] · Montevideo</strong></p>
+    <p>📞 <a href="tel:+598[TU_NUMERO]" style="color: inherit;">[Tu número de teléfono]</a></p>
+    <br>
+    <p>💙 Lavadero 2.4 — Trabajamos con amor y confianza</p>
+</footer>
+
+<script>
+    let reservas = JSON.parse(localStorage.getItem('reservasLavadero')) || [];
+    let horarioSeleccionado = null;
+    const todosLosHorarios = ["09:00", "10:00", "11:00", "12:00", "14:00", "15:00", "16:00", "17:00"];
+
+    function cargarHorarios() {
+        const fecha = document.getElementById('fecha').value;
+        const contenedor = document.getElementById('lista-horarios');
+        contenedor.innerHTML = '';
+        if (!fecha) return;
+        const ocupadas = reservas.filter(r => r.fecha === fecha).map(r => r.hora);
+        todosLosHorarios.forEach(hora => {
+            const div = document.createElement('div');
+            div.className = 'horario ' + (ocupadas.includes(hora) ? 'ocupado' : 'disponible');
+            div.textContent = hora;
+            if (!ocupadas.includes(hora)) {
+                div.onclick = () => {
+                    document.querySelectorAll('.horario').forEach(h => h.classList.remove('seleccionado'));
+                    div.classList.add('seleccionado');
+                    horarioSeleccionado = hora;
+                };
+            }
+            contenedor.appendChild(div);
+        });
+    }
+
+    function confirmarReserva() {
+        const fecha = document.getElementById('fecha').value;
+        const nombre = document.getElementById('nombre').value.trim();
+        const tel = document.getElementById('telCliente').value.trim();
+        const vehiculo = document.getElementById('vehiculo').value;
+        const msg = document.getElementById('mensajeReserva');
+        if (!fecha || !horarioSeleccionado || !nombre || !tel || !vehiculo) {
+            msg.textContent = '⚠️ Completá todos los datos'; msg.style.color = '#e67e22'; return;
+        }
+        if (reservas.some(r => r.fecha === fecha && r.hora === horarioSeleccionado)) {
+            msg.textContent = '❌ Ese turno ya está ocupado'; msg.style.color = '#e74c3c'; cargarHorarios(); return;
+        }
+        reservas.push({id: Date.now(), fecha, hora: horarioSeleccionado, nombre, telefono: tel, vehiculo, fechaRegistro: new Date().toLocaleString()});
+        localStorage.setItem('reservasLavadero', JSON.stringify(reservas));
+        msg.innerHTML = '✅ ¡Reserva confirmada! ' + fecha + ' a las ' + horarioSeleccionado + '<br>Te esperamos 💙';
+        msg.style.color = '#27ae60';
+        document.getElementById('nombre').value = '';
+        document.getElementById('telCliente').value = '';
+        document.getElementById('vehiculo').value = '';
+        horarioSeleccionado = null;
+        cargarHorarios();
+        actualizarListaAdmin();
+    }
+
+    function mostrarAdmin() {
+        document.getElementById('admin').classList.toggle('oculto');
+        actualizarListaAdmin();
+    }
+
+    function actualizarListaAdmin() {
+        const caja = document.getElementById('listaReservas');
+        if (reservas.length === 0) { caja.innerHTML = '<p style="text-align:center; color:#888;">Sin reservas todavía</p>'; return; }
+        reservas.sort((a,b) => new Date(a.fecha+' '+a.hora) - new Date(b.fecha+' '+b.hora));
+        caja.innerHTML = reservas.map(r => `<div class="reserva-item"><strong>📅 ${r.fecha} — ${r.hora}</strong><br>👤 ${r.nombre}<br>📞 ${r.telefono}<br>🚗 ${r.vehiculo}<br><button onclick="borrarReserva(${r.id})" style="background:#e74c3c; padding:0.4rem; margin-top:0.5rem;">🗑️ Eliminar</button></div>`).join('');
+    }
+
+    function borrarReserva(id) {
+        if (confirm('¿Eliminar esta reserva?')) {
+            reservas = reservas.filter(r => r.id !== id);
+            localStorage.setItem('reservasLavadero', JSON.stringify(reservas));
+            actualizarListaAdmin();
+            cargarHorarios();
+        }
+    }
+
+    function exportarReservas() {
+        const texto = reservas.map(r => `Fecha: ${r.fecha} ${r.hora}\nNombre: ${r.nombre}\nTel: ${r.telefono}\nVehículo: ${r.vehiculo}\n---`).join('\n');
+        navigator.clipboard.writeText(texto).then(() => alert('✅ Lista copiada!'));
+    }
+</script>
+
+</body>
+</html>
